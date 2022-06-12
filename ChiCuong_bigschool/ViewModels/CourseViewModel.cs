@@ -10,15 +10,24 @@ namespace ChiCuong_bigschool.ViewModels
     public class CourseViewModel
     {
         [Required] // rang buoc du lieu tren form them khoa hc
-        public string Place { get; set; } 
+        public string Place { get; set; }
+
+        [Required]
+        [FutureDate]
         public string Date { get; set; }
-        public string Time { get; set; } 
-        public byte Category { get; set; } 
-        public IEnumerable<Category> Categories { get; set; } 
+
+        [Required]
+        [ValidTime]
+        public string Time { get; set; }
+
+        [Required]
+        public byte Category { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+
         public DateTime GetDateTime()
         {
             return DateTime.Parse(string.Format("{0} {1}", Date, Time));
-        }
 
+        }
     }
 }

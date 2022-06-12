@@ -10,8 +10,12 @@ namespace ChiCuong_bigschool.ViewModels
     {
         [Required] 
         public string Place { get; set; }
+
         [Required]
         [FutureDate]
-        public string Date {get; set;}  
+        public string Date { get; set; }
+
+        [Required]
+        public string Time { get; set; }
     }
 }
