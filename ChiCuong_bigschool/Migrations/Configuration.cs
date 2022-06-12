@@ -5,7 +5,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ChiCuong_bigschool.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Models.ApplicationDbContext>
     {
         public Configuration()
         {
