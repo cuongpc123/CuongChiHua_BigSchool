@@ -56,7 +56,7 @@ namespace ChiCuong_bigschool.Controllers
             _dbContext.Courses.Add(course);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Indưx", "Hoome");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
