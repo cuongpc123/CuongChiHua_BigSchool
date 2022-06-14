@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ChiCuong_bigschool.Controllers
 {
-    public class CoursesController : Controller
+    public class CoursesController : Controller//
     {
         private readonly ApplicationDbContext _dbContext;
 
