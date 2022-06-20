@@ -6,7 +6,7 @@
     public partial class IntialModel : DbMigration
     {
         public override void Up()
-        {//
+        {
             CreateTable(
                 "dbo.Attendances",
                 c => new
