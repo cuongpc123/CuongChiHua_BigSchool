@@ -1,7 +1,10 @@
 ﻿@model ChiCuong_bigschool.ViewModels.CoursesViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Attending</h2>
 <div class="row">
     <ul class="course">
         @foreach (var course in Model.UpcommingCourses)
@@ -35,32 +38,18 @@
 </div>
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
             $('.js-toggle-attendance').click(function (e) {
                 var button = $(e.target);
-                if (button.hasClass("btn-default")) {
-                    $.post("/api/attendances", { courseId: button.attr("data-course-id") })
-                        .done(function () {
-                            button
-                                .removeClass("btn-default")
-                                .addClass("btn-info")
-                                .text("Going");
-                        }).fail(function () {
-                            alert("Something failed!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "api/attendances/" + button.attr("data-course-id"),
-                        method: "DELETE"
-                    }).done(function () {
-                        button.removeClass("btn-info").addClass("btn-default").text("Going ?");
-
+                $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                    .done(function () {
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Going");
                     }).fail(function () {
-                        alert("Something failed 2");
+                        alert("Something failed!");
                     });
-                }
-
             });
 
             $(".js-toggle-follow").click(function (e) {
@@ -72,7 +61,7 @@
                     .fail(function () {
                         alert("Something failed");
                     });
-             });
-           });
-    </script>
+            });
+        });</script>
 }
+

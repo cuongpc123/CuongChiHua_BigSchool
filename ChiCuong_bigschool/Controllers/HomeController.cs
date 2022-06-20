@@ -1,16 +1,19 @@
-﻿using System;
+﻿using ChiCuong_bigschool.Models;
+using ChiCuong_bigschool.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 
 namespace ChiCuong_bigschool.Controllers
 {
+
     public class HomeController : Controller
     {
-        private ApplicationDbContext _dbContext; 
-
+        private ApplicationDbContext _dbContext;
         public HomeController()
         {
             _dbContext = new ApplicationDbContext();
@@ -18,13 +21,23 @@ namespace ChiCuong_bigschool.Controllers
 
         public ActionResult Index()
         {
-            var upcomingCourse = _dbContext.Course
-                .Include(c => c.Lecturer)
-                .Include(c => c.Category)
-                .Where(c => c.DataTime > DataTime.Now);
+            var userId = User.Identity.GetUserId();
+            var upcommingCourses = _dbContext.Courses.Include(c => c.Lecturer)
+                                                     .Include(c => c.Category)
+                                                     .Where(a => a.IsCanceled == false)
+                                                     .Where(c => c.DateTime > DateTime.Now);
 
-            return View(upcomingCourse);
+            var viewModel = new CoursesViewModel
+            {
+                UpcommingCourses = upcommingCourses,
+                ShowAction = User.Identity.IsAuthenticated,
+                Followings = _dbContext.Followings.Where(f => userId != null && f.FolloweeId == userId).ToList(),
+                Attendances = _dbContext.Attendances.Include(a => a.Course).ToList()
+
+            };
+            return View(viewModel);
         }
+
 
         public ActionResult About()
         {
